@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @import 'tailwind/base';
+@import 'tailwind/components';
+@import 'tailwind/utilities'; */
+@layer base {
+  body{
+    @apply m-0 p-0 bg-[#e2e1dd];
+  }
+  main{
+    min-height: 100vh;
+    overflow-y: hidden;
+  }
+}
+@layer utilities {
+  .mon-grid-row{
+    grid-template-rows: 8% 84% 8%; 
+  }
+  .mon-grid-row2{
+    grid-template-rows: 6.5% 6.5% 87%; 
+  }
+  
+.right-chat {
+  grid-template-rows: 12.5% 1fr;
+}
+
+.user-list {
+  overflow-y: scroll;
+ 
+}
+
+.messages {
+  overflow-y: scroll;
+}
+.truncateCss {
+  white-space: nowrap; /* Empêche le retour à la ligne */
+  overflow: hidden; /* Masque le contenu débordant */
+  text-overflow: ellipsis; /* Affiche les points de suspension */
+}
+
+}
