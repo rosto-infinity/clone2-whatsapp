@@ -2,9 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useMyContext } from "../../../context/ContextProvider";
 function UserLists() {
+  // const [actifuser, setActifuser] = useMyContext();
+  const [actifuser, setActifuser] = useState([]);
   const [ishover, setIshover] = useState("");
   const [users, setUsers] = useState([]);
-  const [actifuser, setActifuser] = useMyContext();
   const [loading, setLoading] = useState(true);
 
   const getUsers = async () => {

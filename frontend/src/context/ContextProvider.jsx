@@ -3,6 +3,7 @@ import  { createContext, useContext, useState } from 'react';
 const MyContext = createContext({});
 
 export const ContextProvider = ({ children }) => {
+  // const [actifuser, setActifuser] = useState([]);
   const [actifuser, setActifuser] = useState('');
   
 
