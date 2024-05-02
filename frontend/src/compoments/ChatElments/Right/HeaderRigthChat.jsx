@@ -1,6 +1,7 @@
 
+import { useMyContext } from '../../../context/ContextProvider';
 const HeaderRigthChat = () => {
- 
+  const  {actifUser }= useMyContext();
 
   return (
     <div className=' bg-[#f0f2f5] h-full p-2 flex items-center justify-between'>
@@ -37,7 +38,7 @@ const HeaderRigthChat = () => {
       </svg>
 
       </div>
-      <div className="2 text-[16px] ">+237 691 58 48 19 <br />
+      <div className="2 text-[16px] "> {actifUser.phone}<br />
       <span className="text-[13px]">En ligne </span> </div>
     </div>
 

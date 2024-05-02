@@ -2,10 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useMyContext } from "../../../context/ContextProvider";
 function UserLists() {
-  // const [actifuser, setActifuser] = useMyContext();
-  const [actifuser, setActifuser] = useState([]);
+  const  {actifUser, setActifUser }= useMyContext();
+
   const [ishover, setIshover] = useState("");
   const [users, setUsers] = useState([]);
+  // const [actifuser, setActifuser] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const getUsers = async () => {
@@ -41,13 +42,13 @@ function UserLists() {
       <ul className="rounded-md px-2 h-[85vh] mt-1 user-list overflow-hidden ">
         {users.map((user) => (
           <li
-            onClick={()=> setActifuser(user.user)}
+            onClick={()=> setActifUser(user.user)}
             onMouseEnter={() => setIshover(user.user._id)}
             onMouseLeave={() => setIshover('')}
             key={user.user._id}
             className={
               `${ishover === user.user._id &&   'bg-[#f0f2f5]'}
-              ${actifuser._id === user.user._id &&   'bg-[#f0f2f5]'}
+              ${actifUser._id === user.user._id &&   'bg-[#f0f2f5]'}
                 flex p-2 cursor-pointer 
               `}
           >

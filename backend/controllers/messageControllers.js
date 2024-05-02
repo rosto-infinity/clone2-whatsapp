@@ -1,4 +1,4 @@
-import Message from '../modals/messageModals.js';
+import Message from '../models/messageModels.js';
 
 const createMessage = async (req, res) => {
   const { message, image, receverId } = req.body;

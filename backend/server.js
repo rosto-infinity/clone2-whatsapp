@@ -2,6 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import userRoutes from './routes/userRoutes.js';
+import messageRoutes from './routes/messageRoutes.js';
+
 
  const app =express();
 
@@ -18,6 +20,8 @@ app.listen(port, () => {
 });
 
 app.use('/api/users', userRoutes);
+app.use('/api/messages', messageRoutes);
+
 app.get('/', (req, res)=>{
   res.send('API users ok envoyée');
 });

@@ -1,20 +1,47 @@
+import { useState } from "react";
 
-const MessageSender = () => {
+import { useMyContext } from "../../../context/ContextProvider";
+import axios from "axios";
+
+const MessageSender =  () => {
+
+  const [message, setMessage]= useState('');
+  const  {actifUser}= useMyContext();
   
+  const submitHandler = async (e)=>{
+    e.preventDefault();
+    try {
+      const user = JSON.parse(localStorage.getItem("user" || "{}"));
+
+      const config = {
+        headers: {
+          authorization: `bearer ${user.token}`,
+        },
+      }; 
+      const { data } = await axios.post("/api/messages/",
+       {message: message.trim() , receverId:actifUser._id}, config);
+
+       setMessage(' ');
+        console.log(data);
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
   return (
     <div className=' h-full bg-[#f0f2f5]'>
       <form
-       
+       onSubmit={submitHandler}
         className=' flex justify-evenly px-5 py-2 items-center'
       >
         <input 
-          
-          
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           placeholder='Entrez un message'
           className=' w-[92%] p-2 rounded-md outline-none'
         />
-       
-          <button type='submit' className=' opacity-60 cursor-pointer'>
+        {message && message.trim() && (
+        <button type='submit' className=' opacity-60 cursor-pointer'>
             <svg
               viewBox='0 0 24 24'
               height='24'
@@ -32,6 +59,8 @@ const MessageSender = () => {
               ></path>
             </svg>
           </button>
+        )}
+          
        
       </form>
     </div>

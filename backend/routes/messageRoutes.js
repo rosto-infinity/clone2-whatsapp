@@ -7,7 +7,7 @@ import {
 import { protect } from '../middleWares/authMiddleware.js';
 const router = express.Router();
 
-router.route('/').post(protect, createMessage);
+router.route('/').post(protect, createMessage).get(protect, GetMessage);
 
 router.route('/:id').delete(protect, deleteMessage).get(protect, GetMessage);
 
