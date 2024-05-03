@@ -11,7 +11,7 @@ import MessageSender from "./ChatElments/Right/MessageSender";
 
 function ChatContainer({socket}) {
   const{user} = useMyContext();
-  socket.io.emit('connected', user);
+  socket.emit('connected', user);
   return (
     <div
       className=" absolute top-5 bottom-0 left-[2rem] right-[2rem] z-30 shadow-md "
@@ -22,7 +22,7 @@ function ChatContainer({socket}) {
         <div className=" basis-[43%]  h-full  shadow-md">
           <div className="grid grid-cols-1 mon-grid-row2 justify-center h-full shadow-md rounded-md bg-white">
             
-            <HeaderLeftChat socket={socket}/>
+            <HeaderLeftChat />
             <Search />
             <UserLists />
           </div>
@@ -30,8 +30,8 @@ function ChatContainer({socket}) {
         {/* ChatElement__Right */}
         <div className="h-full w-full grid grid-cols-1  mon-grid-row">
           <HeaderRigthChat  socket={socket} />
-          <Messages />
-          <MessageSender />
+          <Messages socket={socket}/>
+          <MessageSender socket={socket}/>
         </div>
       </div>
     </div>

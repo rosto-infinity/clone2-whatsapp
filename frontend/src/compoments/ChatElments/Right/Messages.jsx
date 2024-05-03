@@ -1,11 +1,13 @@
 import axios from "axios";
+import { useEffect, useRef } from "react";
 import { useMyContext } from "../../../context/ContextProvider";
-import { useEffect } from "react";
 
-const Messages = () => {
-  const { actifUser, user, messages, setMessages } = useMyContext();
+const Messages = ({socket}) => {
+  const { messages, actifUser, user, setMessages } = useMyContext();
 
-  const GetMessage = async () => {
+  const messagesEndRef = useRef(null);
+
+  const getUser = async () => {
     try {
       //const user = JSON.parse(localStorage.getItem("user" || "{}"));
 
@@ -25,16 +27,29 @@ const Messages = () => {
       console.log(error);
     }
   };
+
   useEffect(() => {
-    GetMessage();
+    getUser();
   }, [actifUser]);
+
+  useEffect(() => {
+    socket.on('sendmessage', (data) => setMessages([...messages, data]));
+  }, [socket, messages]);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
+
   return (
     <div className="h-[86vh]">
-      <ul className="h-full messages overflow-hidden p-4 relaive">
-        {messages.map((msg) => {
+      <ul className="h-full messages overflow-hidden p-4 relaive pb-10">
+        {messages.map((msg, index) => {
           return (
             <li
               key={msg._id}
+            ref={index === messages.length - 1 ? messagesEndRef : null}
               className={`
            ${
              user._id === msg.senderId
@@ -62,7 +77,7 @@ const Messages = () => {
         border-r-[10px] border-r-transparent`
         }
         >
-          
+
         </div>
               </div>
             </li>

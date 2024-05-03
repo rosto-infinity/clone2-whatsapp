@@ -30,7 +30,7 @@ const MessageSender =  () => {
     }
   }
   return (
-    <div className=' h-full bg-[#f0f2f5]'>
+    <div className=' h-full bg-[#f0f2f5] z-10'>
       <form
        onSubmit={submitHandler}
         className=' flex justify-evenly px-5 py-2 items-center'
