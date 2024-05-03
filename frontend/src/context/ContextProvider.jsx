@@ -1,5 +1,5 @@
 
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 // Création du contexte
 const MyContext = createContext({});
@@ -9,10 +9,17 @@ export const ContextProvider = ({ children }) => {
   // State pour l'utilisateur actif
   const [actifUser, setActifUser] = useState('');
   const [messages, setMessages] = useState([]);
+  const [user, setUser] = useState();
 
+
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user" || "{}"));
+    setUser(user);
+   }, []);
   // Renvoyer le contexte avec les enfants
   return (
-    <MyContext.Provider value={{messages, setMessages,  actifUser, setActifUser}}>
+    <MyContext.Provider value={{messages, user, setMessages,  actifUser, setActifUser}}>
       {children}
     </MyContext.Provider>
   );

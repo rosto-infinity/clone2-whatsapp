@@ -1,8 +1,21 @@
 
+import { useState, useEffect } from 'react';
 import { useMyContext } from '../../../context/ContextProvider';
-const HeaderRigthChat = () => {
-  const  {actifUser }= useMyContext();
+const HeaderRigthChat = ({socket}) => {
+  const  {actifUser}= useMyContext();
+  const  {userConnect, setUserConnect  }= useState([]);
 
+
+
+useEffect(() => {
+  socket.on('userConnected', (data) =>{
+    console.log(data);
+    setUserConnect(data)
+  });
+  
+},[socket, userConnect]);
+
+const isOnline = userConnect.find((user) => user.userId === actifUser._id);
   return (
     <div className=' bg-[#f0f2f5] h-full p-2 flex items-center justify-between'>
     <div className="flex items-center justify-between gap-2">
@@ -39,7 +52,10 @@ const HeaderRigthChat = () => {
 
       </div>
       <div className="2 text-[16px] "> {actifUser.phone}<br />
-      <span className="text-[13px]">En ligne </span> </div>
+      <span className="text-[13px]">
+        {isOnline ? 'en ligne' : 'or ligne'} 
+        {''}
+        </span> </div>
     </div>
 
     <div className="flex justify-between gap-5 ">

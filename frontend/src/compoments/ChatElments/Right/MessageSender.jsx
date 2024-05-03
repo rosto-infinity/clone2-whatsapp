@@ -6,7 +6,7 @@ import axios from "axios";
 const MessageSender =  () => {
 
   const [message, setMessage]= useState('');
-  const  {actifUser}= useMyContext();
+  const  {actifUser, messages, setMessages}= useMyContext();
   
   const submitHandler = async (e)=>{
     e.preventDefault();
@@ -21,6 +21,7 @@ const MessageSender =  () => {
       const { data } = await axios.post("/api/messages/",
        {message: message.trim() , receverId:actifUser._id}, config);
 
+       setMessages([...messages,data]);
        setMessage(' ');
         console.log(data);
     } catch (error) {

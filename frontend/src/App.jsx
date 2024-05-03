@@ -1,10 +1,14 @@
 
 import { useEffect, useState } from 'react';
+import io from 'socket.io-client';
 import './App.css';
-import ChatContainer from './compoments/ChatContainer';
-import Header from './compoments/Header';
 import Auth from './compoments/Auth/Auth';
 import AuthHeader from './compoments/Auth/AuthHeader';
+import ChatContainer from './compoments/ChatContainer';
+import Header from './compoments/Header';
+
+
+const socket = io.connect('http://localhost:3000/');
 function App() {
 
   const [user, setUser] = useState({});
@@ -22,7 +26,7 @@ function App() {
   
    <div> 
    <Header />
-   <ChatContainer />  
+   <ChatContainer socket={socket}/>  
    </div>
     ) ;
     
